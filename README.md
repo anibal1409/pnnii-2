@@ -183,12 +183,12 @@ AGENTS.md, CLAUDE.md                  Reglas de negocio para asistentes de IA
 |---|---|---|---|
 | Teoremas I y II | `TeoremasArbolBinario` | 1.1 Teoremas I y II | Máximo de nodos en el nivel *i* (2^i) y en un árbol de altura *h* (2^(h+1) − 1), comprobado sumando por niveles. |
 | Representación en arreglos | `NavegacionPadreHijo` | 1.2 Navegación padre-hijo | Índices del padre y de los hijos de cada posición del arreglo. |
-| Altura y nodos (ejercicio resuelto 1) | `VerificarArbol` | — | Altura, nodos por nivel y máximo de nodos de un árbol dado. |
+| Altura y nodos (ejercicio resuelto 1) | `VerificarArbol` | — | Para A(B(D,E), C(-,F)) en un arreglo: altura 2, 3 nodos en el nivel 2 y 7 nodos como máximo si fuera lleno. |
 | INSERTAR | `InsertarMaxHeap`, `InsertarMinHeap` | 1.3 Algoritmo INSERTAR | Inserta al final y sube el elemento mientras viole la propiedad de heap. O(log n). |
 | HEAPIFY | `HeapifyMaxHeap` | 1.4 Algoritmo HEAPIFY | Hunde un elemento hasta restaurar la propiedad de Max-Heap. O(log n). |
 | Construcción de un heap | `ConstruirMaxHeap` | 1.5 Construir un Heap | Aplica HEAPIFY desde el último nodo interno hasta la raíz. O(n). |
-| Caso 6.1: hospital | `HospitalPrioridades` | 1.6 Caso: Hospital | Cola de prioridad de pacientes según gravedad. |
-| Caso 6.2: cola de impresión | `ColaImpresion` | 1.7 Caso: Cola de impresión | Cola de prioridad de trabajos de impresión. |
+| Caso 6.1: hospital | `HospitalPrioridades` | 1.6 Caso: Hospital | Min-Heap de códigos de gravedad (1 = crítico … 5 = no urgente): se atiende primero el código más bajo. |
+| Caso 6.2: cola de impresión | `ColaImpresion` | 1.7 Caso: Cola de impresión | Max-Heap de prioridades 1 (baja), 2 (normal) y 3 (urgente): se imprime primero la mayor. |
 
 Las erratas del material corregidas están en [`material/unidades/unidad-1-erratas.md`](material/unidades/unidad-1-erratas.md).
 

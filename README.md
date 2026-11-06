@@ -133,10 +133,14 @@ El Java incluido se recorta con `jlink` a los módulos que `jdeps` detecta en el
 ```
 material/
   programa/programa-analitico.md      Programa oficial: objetivos y contenidos de las 5 unidades
-  unidades/unidad-N-*.md              Material de cada unidad (fuente de verdad)
+  unidades/unidad-N-*.md              Material de cada unidad (fuente de verdad); las guías
+                                      de las unidades II y III vienen en .docx y su texto
+                                      está extraído en unidad-2-*.md y unidad-3-*.md
   unidades/unidad-N-erratas.md        Errores del material y su corrección
 consola/
   unidad1/                            Programas de consola de la Unidad I
+  unidad2/                            Programas de consola de la Unidad II
+  unidad3/                            Programas de consola de la Unidad III
 laboratorio/                          Aplicación gráfica (Maven, Java 17)
   pom.xml                             FlatLaf, exec-maven-plugin y maven-shade-plugin
   mvnw, mvnw.cmd, .mvn/               Maven wrapper
@@ -154,7 +158,14 @@ laboratorio/                          Aplicación gráfica (Maven, Java 17)
       Catalogo.java                   Registro de todas las prácticas
     ui/                               Ventana, barra lateral, visor de código,
                                       reproductor, lienzo, tema y paleta
-    unidad1/                          Prácticas y escenas de la Unidad I
+      Tono.java                       Rol visual (actual, comparando, intercambio...)
+      Dibujo.java                     Utilidades de pintura: celdas, pastillas, leyenda
+      Arbol.java                      Dibuja árboles y bosques (llamadas, fusiones)
+    unidad1/                          Prácticas y escenas de la Unidad I (árbol + arreglo)
+    unidad2/                          Unidad II: EscenaArreglo (rangos, punteros y árbol
+                                      de llamadas recursivas), ArbolLlamadas, Intercalar
+    unidad3/                          Unidad III: EscenaCinta, EscenaMochila, EscenaFusion,
+                                      EscenaGrafo y Grafo (lectura de aristas u-v:peso)
 scripts/
   verificar.sh                        Compila y ejecuta todo
   consola.sh                          Ejecuta un programa de consola por nombre
@@ -172,8 +183,8 @@ AGENTS.md, CLAUDE.md                  Reglas de negocio para asistentes de IA
 | Unidad | Tema | Contenido | Estado |
 |---|---|---|---|
 | I | Estructuras de datos elementales | Árbol, altura, nivel, grado; binarios y HEAP; Teoremas I y II; INSERTAR y HEAPIFY | Completa |
-| II | Divide y conquista | Búsqueda binaria, máximos y mínimos, Sortmerge, Sortmerge 2, Quicksort | Pendiente |
-| III | Método de adquisición | Cintas magnéticas, mochila, intercalación óptima, árbol de costo mínimo, camino más corto | Pendiente |
+| II | Divide y conquista | Búsqueda binaria, máximos y mínimos, Sortmerge, Sortmerge 2, Quicksort | Completa |
+| III | Método de adquisición | Cintas magnéticas, mochila, intercalación óptima, árbol de costo mínimo, camino más corto | Completa |
 | IV | Programación dinámica | Grafos multietapa, ABB óptimos, vendedor viajero | Pendiente |
 | V | Ir hacia atrás | N reinas, suma de subconjuntos | Pendiente |
 
@@ -191,6 +202,46 @@ AGENTS.md, CLAUDE.md                  Reglas de negocio para asistentes de IA
 | Caso 6.2: cola de impresión | `ColaImpresion` | 1.7 Caso: Cola de impresión | Max-Heap de prioridades 1 (baja), 2 (normal) y 3 (urgente): se imprime primero la mayor. |
 
 Las erratas del material corregidas están en [`material/unidades/unidad-1-erratas.md`](material/unidades/unidad-1-erratas.md).
+
+### Unidad II: Divide y conquista
+
+Las prácticas recursivas dibujan el **árbol de llamadas**: la llamada activa, las que esperan en la pila y las que ya devolvieron su resultado (escrito debajo de cada nodo). El arreglo atenúa lo que queda fuera del tramo `[inicio, fin]` y señala con flechas las variables `inicio`, `medio`, `fin`, `i`, `j`, `k`, `bajo` y `alto`.
+
+| Tema | Programa de consola | Práctica del laboratorio | Qué hace |
+|---|---|---|---|
+| Búsqueda binaria recursiva (3.3) | `BusquedaBinaria` | 2.1 Búsqueda binaria recursiva | Busca 25 en `3 7 12 19 25 33 42 56 71` y lo halla en el índice 4. O(log n). |
+| Búsqueda binaria iterativa (3.4) | `BusquedaBinariaIterativa` | 2.2 Búsqueda binaria iterativa | El mismo algoritmo con un ciclo que ajusta `inicio` y `fin`; 19 está en el índice 3. |
+| Ejercicio resuelto 1: orden descendente | `BusquedaBinariaDesc` | — | En `20 15 10 5 0` el mayor está a la izquierda: 10 está en el índice 2. |
+| Máximos y mínimos (4) | `MaxMinDYC` | 2.3 Máximos y mínimos | Máximo 15 y mínimo 2 de `8 3 15 6 2 11 7 4` con 10 comparaciones = 3n/2 − 2 (el método ingenuo usa 2n − 2 = 14). |
+| Sortmerge (5) | `MergeSort` | 2.4 Sortmerge (recursivo) | Divide hasta tramos de un elemento e intercala con los temporales `izq` y `der`. O(n log n), estable. |
+| Sortmerge 2 (6) | `MergeSortIterativo` | 2.5 Sortmerge 2 (iterativo) | Bottom-up: pasadas con bloques de 1, 2, 4… y el resultado de cada pasada. Maneja n que no es potencia de 2. |
+| Quicksort (7) | `Quicksort` | 2.6 Quicksort (Lomuto) | Pivote = último elemento; zona ≤ pivote, `i`, `j` e intercambios animados; cuenta comparaciones (15 en el ejemplo). |
+| Ejercicio resuelto 2: peor caso | `PeorCasoQuicksort` | 2.6 con `1, 2, 3, 4, 5, 6, 7, 8` | Con el arreglo ya ordenado cada partición deja un lado vacío: 28 = n(n−1)/2 comparaciones. |
+| Caso 1: guía telefónica | `GuiaTelefonica` | — | Búsqueda binaria recursiva sobre cadenas con `compareTo`. |
+| Caso 2: pedidos de comercio electrónico | `SistemaPedidos` | — | Integra máx/mín por D&C, Quicksort y búsqueda binaria sobre los montos. |
+
+Erratas: [`material/unidades/unidad-2-erratas.md`](material/unidades/unidad-2-erratas.md).
+
+### Unidad III: Método de adquisición (estrategia voraz)
+
+El material trae el código en **Python**; los programas de consola lo traducen a Java con las restricciones de la asignatura (sin colecciones): ordenamiento por selección o inserción, Min-Heap en arreglo para la cola de prioridad, union-find con arreglos `padre[]` y `rango[]`, y Prim y Dijkstra con matriz de adyacencia O(V²), la variante que el material describe en 5.6 y 6.5.
+
+En el laboratorio, los grafos se escriben como `u-v:peso` separados por comas (en Dijkstra `u-v` significa u → v). La tabla lateral muestra `costo/padre` (Prim), las aristas ordenadas y `padre[]` (Kruskal) o `dist/prev` (Dijkstra).
+
+| Tema | Programa de consola | Práctica del laboratorio | Qué hace |
+|---|---|---|---|
+| Almacenamiento óptimo en cintas (2) | `AlmacenamientoCintas` | 3.1 Almacenamiento en cintas | Graba primero el archivo más corto: `15 3 8 20 5` pasa de T = 156 a T = 109. La cinta se dibuja con segmentos proporcionales y el tiempo de llegada de cada archivo. |
+| Ejercicio resuelto 1: cintas con probabilidades | `CintasProbabilidades` | — | Ordena por p/L descendente (regla de Smith): orden B C D A con tiempo esperado 8.00, frente a 15.50 del orden A B C D. |
+| Bolsa de papel / mochila fraccionaria (3) | `MochilaFraccionaria` | 3.2 Bolsa de papel | Toma objetos por razón v/w descendente; con C = 50 obtiene 240 (el tercer objeto entra en 2/3). La bolsa se llena por colores. |
+| Ejercicio resuelto 2: mochila con 4 objetos | `MochilaEjercicioResuelto` | 3.2 con sus datos | Con C = 15 todos caben completos: valor 37. |
+| Modelos óptimos de intercalación (4) | `IntercalacionOptima` | 3.3 Intercalación óptima | Fusiona siempre los dos menores (Huffman) con un Min-Heap: `4 3 2 6` → costo 29. Dibuja el árbol de fusiones y el heap. |
+| Árbol de costo mínimo: Prim (5.3) | `PrimMST` | 3.4 Árbol de costo mínimo: Prim | Hace crecer el árbol con la arista más barata hacia afuera; peso 4 en el ejemplo. Detecta grafos no conexos. |
+| Árbol de costo mínimo: Kruskal (5.4) | `KruskalMST` | 3.5 Árbol de costo mínimo: Kruskal | Aristas de menor a mayor; acepta si no forma ciclo (union-find con compresión de camino y unión por rango). |
+| Camino más corto desde un origen (6) | `Dijkstra` | 3.6 Camino más corto: Dijkstra | Distancias `0 3 1 4 7` desde 0 y camino `0 → 2 → 1 → 3 → 4`, reconstruido con `prev`. |
+| Caso 7.1: centro de datos | `CasoCentroDatos` | 3.1 y 3.3 con sus datos | Backups en cinta (T = 3190 frente a 5775 en orden descendente) y fusión de logs (costo 141). |
+| Caso 7.2: red de transporte | `CasoTransporte` | 3.4 y 3.6 con sus datos (en 3.6, cada calle en ambos sentidos) | Ciclovías de 21 km con Prim y distancias `0 4 3 9 8 11 12` desde el barrio 0 con Dijkstra. |
+
+Erratas: [`material/unidades/unidad-3-erratas.md`](material/unidades/unidad-3-erratas.md). Entre ellas, los resultados numéricos de los dos casos prácticos, que no coinciden con los datos del propio material.
 
 ## 9. Agregar contenido nuevo
 

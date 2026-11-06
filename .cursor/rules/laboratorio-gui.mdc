@@ -1,0 +1,34 @@
+---
+description: Arquitectura y reglas de UI/UX del laboratorio gráfico Swing + FlatLaf
+globs: laboratorio/**
+alwaysApply: false
+---
+
+# Laboratorio gráfico
+
+Maven con wrapper (`./mvnw`), Java 17, Swing + FlatLaf 3 y las fuentes Inter y JetBrains Mono. No se añaden dependencias sin consultar al usuario.
+
+## Arquitectura (`pnni.laboratorio`)
+
+- `nucleo/`: modelo independiente de la unidad. `Practica` → `ejecutar(Entrada)` → `Traza` (una lista de `Paso`). Cada `Paso` contiene las líneas de código, el título, la explicación, las variables, la salida acumulada y la `Escena`.
+- `ui/`: ventana, barra lateral, visor de código, reproductor, `Paleta`, `Tema` y componentes base (`Tarjeta`, `Insignia`, `Iconos`).
+- `unidadN/`: las prácticas y escenas de cada unidad. Ejemplos de referencia: `unidad1/PracticaInsertar.java`, `unidad1/TrazadorHeap.java` y `unidad1/EscenaHeap.java`.
+- Toda práctica nueva se registra en `nucleo/Catalogo.java`, en el orden del programa analítico.
+
+## Reglas de la traza
+
+- El código mostrado es un texto Java con marcas `@@nombre` al final de la línea. La traza referencia marcas, nunca números de línea.
+- El algoritmo trazado es **el mismo** que el del programa de consola equivalente y produce la misma salida (`t.imprimirLinea`).
+- Hay un paso por cada decisión visible: cada condición evaluada (con sus valores y el resultado), cada asignación relevante y cada intercambio.
+- Las explicaciones, en español, dicen qué ocurre y por qué, citando valores concretos.
+- Las escenas son inmutables: copian los arreglos al crearse.
+- La entrada inválida lanza `IllegalArgumentException` con un mensaje claro (usa `entrada.error(...)`). Los tamaños se limitan para que la visualización sea legible.
+
+## UI/UX
+
+- Los colores salen **siempre** de `Paleta.actual()`, nunca de valores fijos, para que el tema claro/oscuro funcione en caliente. Los colores por rol son: acento = actual, info = padre o referencia, violeta = hijo, aviso = comparando, peligro = intercambio, éxito = terminado.
+- Los contenedores son `Tarjeta`, y las etiquetas de estado son `Insignia`. Los iconos se dibujan como vectores en `Iconos`, sin imágenes.
+- Las animaciones duran unos 450 ms, con easing, y el progreso se recibe en `Escena.pintar(..., progreso, ...)`.
+- Cada escena incluye una leyenda de colores y los punteros con el nombre de la variable (por ejemplo, `↑ i`).
+- Accesibilidad: hay atajos de teclado (Espacio, ←, →, Inicio, Fin, F5), tooltips en los controles, contraste suficiente en ambos temas y texto de al menos 11 px.
+- Tras cualquier cambio visual, se verifica con capturas en ambos temas (ver la skill `practica-laboratorio`).

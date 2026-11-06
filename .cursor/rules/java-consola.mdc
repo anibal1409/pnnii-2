@@ -1,0 +1,39 @@
+---
+description: Convenciones obligatorias de los programas de consola de PNN II (restricciones del material)
+globs: consola/**/*.java
+alwaysApply: false
+---
+
+# Programas de consola
+
+Restricciones del material (Unidad I, §3.1): "solo main() y métodos estáticos dentro de la misma clase".
+
+- Un archivo `.java` por programa, en `consola/unidadN/`, **sin `package`** (paquete por defecto) para que funcione `java consola/unidadN/Programa.java`.
+- **Una sola clase pública** con `main`. Se permiten métodos `static` auxiliares en la misma clase. No se permiten clases adicionales, objetos propios, interfaces, genéricos ni lambdas.
+- Las estructuras se representan con **arreglos** (`int[]`, `boolean[]`, `int[][]`), con índice base 0. Si se requiere otra base, se documenta en el encabezado.
+- **No se usan colecciones** de `java.util` (`ArrayList`, `PriorityQueue`, `Arrays.sort`...) para resolver el algoritmo: se construye desde cero. Se permiten `System`, `Math` y `String`, y `java.util.Scanner` solo si el programa pide datos al usuario.
+- **Identificadores en ASCII** (`tamano`, no `tamaño`) y en español, con camelCase.
+- **Salida por consola en ASCII** (sin tildes ni ñ: "despues", "mas"), para que se vea bien en cualquier terminal.
+- **Comentario en cada línea de código** (estilo del material), con tildes permitidas. Se comenta el porqué, no solo el qué.
+- Intercambios con variable temporal (`temp`), como en el material.
+- Ejemplos de datos fijos en `main` (los del material cuando existan) y una salida que muestre el resultado y, si ayuda, los pasos intermedios.
+
+## Encabezado obligatorio
+
+```java
+/*
+ * =============================================================================
+ *  PROGRAMACION NO NUMERICA II (4703337)
+ *  Unidad II : Divide y conquista
+ *  Tema      : Busqueda binaria
+ *  Programa  : BusquedaBinaria
+ *  Objetivo  : <qué hace y qué estrategia aplica>
+ *  Complejidad: O(log n)
+ *  Ejecutar  : java consola/unidad2/BusquedaBinaria.java
+ * =============================================================================
+ */
+```
+
+## Antes de terminar
+
+Ejecuta `scripts/verificar.sh unidadN`. Debe compilar con `-Xlint:all` sin advertencias, ejecutar sin excepciones y producir una salida que hayas comprobado a mano. Si el material indica otra salida, regístralo en `material/unidades/unidad-N-erratas.md`.

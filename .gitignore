@@ -1,0 +1,10 @@
+# Compilados
+laboratorio/target/
+*.class
+
+# IDEs
+.idea/
+*.iml
+
+# Paquetes para estudiantes (se generan con scripts/distribuir.sh)
+distribucion/

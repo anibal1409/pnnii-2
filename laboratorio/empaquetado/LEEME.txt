@@ -1,0 +1,30 @@
+LABORATORIO DE ALGORITMOS - PROGRAMACION NO NUMERICA II (4703337)
+=================================================================
+
+Aplicacion para ver, paso a paso, como funcionan los algoritmos de la
+asignatura: el codigo que se ejecuta, las variables, la salida de consola
+y una animacion de la estructura de datos.
+
+COMO ABRIRLO
+------------
+Windows : descomprime el .zip (clic derecho > Extraer todo) y haz doble
+          clic en "Abrir Laboratorio.bat". No necesitas instalar Java.
+          Si Windows muestra "Windows protegio su PC", pulsa
+          "Mas informacion" > "Ejecutar de todas formas".
+Linux   : tar -xzf Laboratorio-PNN-II-Linux.tar.gz
+          ./Laboratorio-PNN-II/bin/Laboratorio-PNN-II
+          No necesitas instalar Java.
+macOS u otro sistema: instala Java 17 o superior (https://adoptium.net)
+          y haz doble clic en Laboratorio-PNN-II.jar, o ejecuta:
+          java -jar Laboratorio-PNN-II.jar
+
+COMO USARLO
+-----------
+1. Elige una practica en la barra lateral.
+2. Cambia los datos de entrada si quieres y pulsa "Ejecutar" (F5).
+3. Recorre la ejecucion con los controles de abajo:
+     Espacio  reproducir / pausar
+     <- ->    paso anterior / siguiente
+     Inicio   primer paso      Fin  ultimo paso
+4. La pestana "Programa de consola" muestra el programa .java equivalente.
+5. El boton del sol / luna cambia entre tema claro y oscuro.

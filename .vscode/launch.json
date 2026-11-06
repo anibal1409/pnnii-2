@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Laboratorio (interfaz grafica)",
+      "request": "launch",
+      "mainClass": "pnni.laboratorio.App",
+      "projectName": "laboratorio"
+    },
+    {
+      "type": "java",
+      "name": "Programa de consola abierto",
+      "request": "launch",
+      "mainClass": "${file}"
+    }
+  ]
+}

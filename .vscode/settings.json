@@ -1,0 +1,13 @@
+{
+  "files.encoding": "utf8",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.import.maven.enabled": true,
+  "java.compile.nullAnalysis.mode": "disabled",
+  "[java]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "files.exclude": {
+    "**/target": true
+  }
+}

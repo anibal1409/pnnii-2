@@ -15,7 +15,7 @@ icono="laboratorio/src/main/resources/icono.png"
 trabajo="$(mktemp -d)"
 trap 'rm -rf "$trabajo"' EXIT
 mkdir -p "$dist" "$cache"
-rm -f "$dist/$nombre"*
+rm -rf "$dist/$nombre"*
 
 echo "== JAR"
 (cd laboratorio && ./mvnw -q -B clean package)
